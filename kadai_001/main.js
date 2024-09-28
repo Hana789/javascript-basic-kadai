@@ -53,7 +53,7 @@ const keyPress = e => {
     typedfield.textContent = typed;
     untypedfield.textContent = untyped;
 
-
+// 文字入力数をカウントする
     const letters = score;
     letter.textContent = score;
 
