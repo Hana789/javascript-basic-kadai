@@ -8,6 +8,7 @@ const typedfield = document.getElementById('typed');
 const container = document.getElementById('container');
 const start = document.getElementById('start');
 const count = document.getElementById('count');
+const letter = document.getElementById('letter');
 
 // 複数のテキストを格納する配列
 const textLists = [
@@ -27,7 +28,7 @@ const textLists = [
 ];
 // ランダムなテキストを表示
 const createText = () => {
-    typed = "";
+    typed = '';
     typedfield.textContent = typed;
     let random = Math.floor(Math.random()*textLists.length);
     untyped = textLists[random];
@@ -46,10 +47,16 @@ const keyPress = e => {
     }
 
     score ++;
+    container.classList.remove('mistyped');
     typed += untyped.substring(0, 1);
     untyped = untyped.substring(1);
     typedfield.textContent = typed;
     untypedfield.textContent = untyped;
+
+
+    const letters = score;
+    letter.textContent = score;
+
 
 
 // テキストがなくなったら新しいテキストを表示
@@ -57,6 +64,8 @@ if(untyped === '') {
     createText();
 }
 };
+
+
 
 // タイピングスキルのランクを判定
 const rankCheck = score => {
@@ -66,7 +75,7 @@ const rankCheck = score => {
     } else if(score < 200) {
         text = `あなたのランクはBです。\nAランクまであと${200 - score}文字です。`;
     } else if(score < 300) {
-        text = `あなたのランクはAです。\nAランクまであと${300 - score}文字です。`;
+        text = `あなたのランクはAです。\nSランクまであと${300 - score}文字です。`;
     } else if(score >= 300) {
         text = `あなたのランクはSです。\nおめでとうございます!`;
     }
