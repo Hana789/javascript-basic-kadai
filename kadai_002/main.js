@@ -88,11 +88,18 @@ return `${score}文字打てました！\n${text}\n【OK】リトライ / 【キ
 // ゲームを終了
 const gameOver = id => {
     clearInterval(id);
-    const result = confirm(rankCheck(score));
-    // OKボタンをクリックしたらリロードする
-    if (result == true) {
-        window.location.reload();
-    }
+
+    // ゲーム終了後に「タイムアップ！」と表示する
+    typedfield.style.display = 'none';
+    untypedfield.textContent = 'タイムアップ！';
+    
+    setTimeout(() => {
+        const result = confirm(rankCheck(score));
+        // OKボタンをクリックしたらリロードする
+        if (result == true) {
+            window.location.reload();
+        }
+    }, 2000);
 };
 
 // カウントダウンタイマー
@@ -105,17 +112,11 @@ const timer = () => {
         count.textContent = time;
         // カウントが０になったらタイマーを停止する
         if(time <= 0) {
-
-            // ゲーム終了後に「タイムアップ！」と表示する
-            typedfield.style.display = 'none';
-            untypedfield.textContent = 'タイムアップ！';
-            setTimeout(() => {
-                gameOver(id);
-            }, 10);
-        
+            gameOver(id);        
         }
     }, 1000);
 };
+
 
 
 
